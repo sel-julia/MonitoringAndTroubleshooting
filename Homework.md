@@ -210,6 +210,14 @@ Connect to JVM using jconsole:
     jconsole localhost:7890
 ```
 
+###### Result:
+![img_18.png](img_18.png)
+![img_19.png](img_19.png)
+![img_20.png](img_20.png)
+![img_21.png](img_21.png)
+![img_22.png](img_22.png)
+![img_23.png](img_23.png)
+
 ## Inspect a Flight Recording
 Execute JVM with two special parameters:
 ```
