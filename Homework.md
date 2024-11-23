@@ -168,11 +168,19 @@ Found 1 deadlock.
 ```
     jstack -l <pid>
 ```
+
+###### Result:
+Thread dump is stored in ThreadDump.txt file
+
 2} kill -3
 ```
     kill -3 <pid>
 ```
 3} jvisualvm
+
+###### Result:
+![img_16.png](img_16.png)
+![img_17.png](img_17.png)
 
 4} Windows (Ctrl + Break)
 
@@ -180,6 +188,9 @@ Found 1 deadlock.
 ```
     jcmd <pid> Thread.print
 ```
+
+###### Result:
+Thread dump is stored in ThreadDump_jcmd.txt file
 
 ## Remote JVM profiling
 Using [JMX Technology](https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html)
