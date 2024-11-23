@@ -21,6 +21,10 @@ Execute and press any key:
 - Press any key in our application
 - Observe how heap grows
 
+###### Result:
+![img.png](img.png)
+![img_1.png](img_1.png)
+
 #### Get heap dump
 ##### Using -XX:+HeapDumpOnOutOfMemoryError option
 - Execute and press any key:
@@ -28,6 +32,8 @@ Execute and press any key:
 ```
     java -jar -Xmx100m -XX:+HeapDumpOnOutOfMemoryError heap-1.0.0-SNAPSHOT.jar
 ```
+###### Result:
+File java_pid25088.hprof is generated
 
 ##### [Optional] Using jcmd
 Get pid using `jps` here and further through this document:
@@ -38,25 +44,42 @@ Get pid using `jps` here and further through this document:
     jcmd <pid> GC.heap_dump <filename>
 ```
 
+###### Result:
+File java_pid20248_jcmd.hprof is generated
+
 ##### [Optional] Using jmap
 ```
     jmap -dump:format=b,file=snapshot.hprof <pid>
 ```
+
+###### Result:
+File snapshot_jmap.hprof is generated
 
 #### Get heap histogram
 ##### Using jcmd
 ```
     jcmd <pid> GC.class_histogram
 ```
+
+###### Result:
+History is stored in HistogramResultJmcd.txt file
+
 ##### Using jmap
 ```
     jmap -histo <pid> 
 ```
 
+###### Result:
+History is stored in HistogramResultJmap.txt file
+
 #### Analyze heap dump
 ##### Using Java Visual VM
 - Open retrieved heap dump in jvisualvm
 - Identify memory leak
+
+###### Result:
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
 
 ##### OQL
 Execute OQL in jvisualvm:
@@ -65,10 +88,25 @@ Execute OQL in jvisualvm:
     select referrers(objs) from java.lang.Object[] objs where objs.length > 100
     select referrers(arr) from java.util.ArrayList arr where arr.size > 100
 ```
+
+###### Result:
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
+![img_8.png](img_8.png)
+
+
 Startup `jhat` (note: `jhat` was decommissioned in JDK 9)
 ```
     jhat <head_dump.hprof>
 ```
+
+###### Result:
+![img_9.png](img_9.png)
+![img_10.png](img_10.png)
+
+
 Execute OQL in jhat
 ```
     select [objs, objs.length] from [Ljava.lang.Object; objs where objs.length > 100
@@ -76,6 +114,18 @@ Execute OQL in jhat
     select referrers(arr) from java.util.ArrayList arr where arr.size > 100
 ```
 Please note small OQL syntax difference in jhat and jvisualvm.
+
+###### Result:
+![img_11.png](img_11.png)
+![img_12.png](img_12.png)
+![img_13.png](img_13.png)
+![img_14.png](img_14.png)
+
+##### _Conclusion:_
+- OutOfMemoryError was thrown in com.epam.jmp.mat.heap.Process class
+- There is an ArrayList field which has many elements, and it causes this error
+![img_15.png](img_15.png)
+- To solve this error, we should refactor this class and adjust logic how this list is used
 
 ## Deadlock troubleshooting
 #### Get deadlock
