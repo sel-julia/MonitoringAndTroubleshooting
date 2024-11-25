@@ -1,8 +1,11 @@
 ## Quiz
 #### Prepare answers to following questions:
 * Which interface JDK tools use to connect to JVM locally?
+VisualVM, jcmd, jmap, jhat, jstack, jconsole, Java Mission Control, jinfo
 * What is difference between profiling and traceability?
-
+Profiling is the process of measuring an application or system by running an analysis tool called a profiler. 
+Profiling tools can focus on many aspects: functions call times and count, memory usage, cpu load, and resource usage. 
+Tracing is a specialized use of logging to record information about a program's execution.
 ## OutOfMemory (OOM) error troubleshooting
 #### Get OOM error
 Execute and press any key:
@@ -227,6 +230,13 @@ Execute JVM with two special parameters:
 ```
     java -jar -Xmx100m -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:StartFlightRecording=dumponexit=true,filename=flight.jfr heap-1.0.0-SNAPSHOT.jar
 ```
+
+Result:
+![img_24.png](img_24.png)
+When I remove -XX:+UnlockCommercialFeatures:
+![img_25.png](img_25.png)
+
+
 Enable Flight Recording on JVM without these parameters:
 ```
     java -jar -Xmx100m -XX:+UnlockCommercialFeatures heap-1.0.0-SNAPSHOT.jar
@@ -237,6 +247,10 @@ Open Java Mission Control and connect to default HotSpot of our JVM:
 ```
     jmc
 ```
+`cd C:\Users\Yuliya_Seliukova\Downloads\jmc-9.0.0_windows-x64\jmc-9.0.0_windows-x64\JDK Mission Control
+jmc -vm "C:\Program Files\Java\jdk-17\bin"`
+
+![img_26.png](img_26.png)
 
 ## jinfo
 Print system properties and command-line flags that were used to start the JVM.
@@ -245,6 +259,10 @@ Print system properties and command-line flags that were used to start the JVM.
     jps
     jinfo <pid>
 ```
+
+###### Result:
+
+Info is stored in jinfo.txt file
 
 ## Practical task evaluation rules:
 * OOM errors troubleshooting : 30 points
