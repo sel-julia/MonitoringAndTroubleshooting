@@ -1,8 +1,11 @@
 ## Quiz
 #### Prepare answers to following questions:
 * Which interface JDK tools use to connect to JVM locally?
+VisualVM, jcmd, jmap, jhat, jstack, jconsole, Java Mission Control, jinfo
 * What is difference between profiling and traceability?
-
+Profiling is the process of measuring an application or system by running an analysis tool called a profiler. 
+Profiling tools can focus on many aspects: functions call times and count, memory usage, cpu load, and resource usage. 
+Tracing is a specialized use of logging to record information about a program's execution.
 ## OutOfMemory (OOM) error troubleshooting
 #### Get OOM error
 Execute and press any key:
@@ -21,6 +24,10 @@ Execute and press any key:
 - Press any key in our application
 - Observe how heap grows
 
+###### Result:
+![img.png](img.png)
+![img_1.png](img_1.png)
+
 #### Get heap dump
 ##### Using -XX:+HeapDumpOnOutOfMemoryError option
 - Execute and press any key:
@@ -28,6 +35,8 @@ Execute and press any key:
 ```
     java -jar -Xmx100m -XX:+HeapDumpOnOutOfMemoryError heap-1.0.0-SNAPSHOT.jar
 ```
+###### Result:
+File java_pid25088.hprof is generated
 
 ##### [Optional] Using jcmd
 Get pid using `jps` here and further through this document:
@@ -38,25 +47,42 @@ Get pid using `jps` here and further through this document:
     jcmd <pid> GC.heap_dump <filename>
 ```
 
+###### Result:
+File java_pid20248_jcmd.hprof is generated
+
 ##### [Optional] Using jmap
 ```
     jmap -dump:format=b,file=snapshot.hprof <pid>
 ```
+
+###### Result:
+File snapshot_jmap.hprof is generated
 
 #### Get heap histogram
 ##### Using jcmd
 ```
     jcmd <pid> GC.class_histogram
 ```
+
+###### Result:
+History is stored in HistogramResultJmcd.txt file
+
 ##### Using jmap
 ```
     jmap -histo <pid> 
 ```
 
+###### Result:
+History is stored in HistogramResultJmap.txt file
+
 #### Analyze heap dump
 ##### Using Java Visual VM
 - Open retrieved heap dump in jvisualvm
 - Identify memory leak
+
+###### Result:
+![img_2.png](img_2.png)
+![img_3.png](img_3.png)
 
 ##### OQL
 Execute OQL in jvisualvm:
@@ -65,10 +91,25 @@ Execute OQL in jvisualvm:
     select referrers(objs) from java.lang.Object[] objs where objs.length > 100
     select referrers(arr) from java.util.ArrayList arr where arr.size > 100
 ```
+
+###### Result:
+![img_4.png](img_4.png)
+![img_5.png](img_5.png)
+![img_6.png](img_6.png)
+![img_7.png](img_7.png)
+![img_8.png](img_8.png)
+
+
 Startup `jhat` (note: `jhat` was decommissioned in JDK 9)
 ```
     jhat <head_dump.hprof>
 ```
+
+###### Result:
+![img_9.png](img_9.png)
+![img_10.png](img_10.png)
+
+
 Execute OQL in jhat
 ```
     select [objs, objs.length] from [Ljava.lang.Object; objs where objs.length > 100
@@ -76,6 +117,18 @@ Execute OQL in jhat
     select referrers(arr) from java.util.ArrayList arr where arr.size > 100
 ```
 Please note small OQL syntax difference in jhat and jvisualvm.
+
+###### Result:
+![img_11.png](img_11.png)
+![img_12.png](img_12.png)
+![img_13.png](img_13.png)
+![img_14.png](img_14.png)
+
+##### _Conclusion:_
+- OutOfMemoryError was thrown in com.epam.jmp.mat.heap.Process class
+- There is an ArrayList field which has many elements, and it causes this error
+![img_15.png](img_15.png)
+- To solve this error, we should refactor this class and adjust logic how this list is used
 
 ## Deadlock troubleshooting
 #### Get deadlock
@@ -118,11 +171,19 @@ Found 1 deadlock.
 ```
     jstack -l <pid>
 ```
+
+###### Result:
+Thread dump is stored in ThreadDump.txt file
+
 2} kill -3
 ```
     kill -3 <pid>
 ```
 3} jvisualvm
+
+###### Result:
+![img_16.png](img_16.png)
+![img_17.png](img_17.png)
 
 4} Windows (Ctrl + Break)
 
@@ -130,6 +191,9 @@ Found 1 deadlock.
 ```
     jcmd <pid> Thread.print
 ```
+
+###### Result:
+Thread dump is stored in ThreadDump_jcmd.txt file
 
 ## Remote JVM profiling
 Using [JMX Technology](https://docs.oracle.com/javase/8/docs/technotes/guides/management/agent.html)
@@ -149,6 +213,14 @@ Connect to JVM using jconsole:
     jconsole localhost:7890
 ```
 
+###### Result:
+![img_18.png](img_18.png)
+![img_19.png](img_19.png)
+![img_20.png](img_20.png)
+![img_21.png](img_21.png)
+![img_22.png](img_22.png)
+![img_23.png](img_23.png)
+
 ## Inspect a Flight Recording
 Execute JVM with two special parameters:
 ```
@@ -158,6 +230,13 @@ Execute JVM with two special parameters:
 ```
     java -jar -Xmx100m -XX:+UnlockCommercialFeatures -XX:+FlightRecorder -XX:StartFlightRecording=dumponexit=true,filename=flight.jfr heap-1.0.0-SNAPSHOT.jar
 ```
+
+Result:
+![img_24.png](img_24.png)
+When I remove -XX:+UnlockCommercialFeatures:
+![img_25.png](img_25.png)
+
+
 Enable Flight Recording on JVM without these parameters:
 ```
     java -jar -Xmx100m -XX:+UnlockCommercialFeatures heap-1.0.0-SNAPSHOT.jar
@@ -168,6 +247,10 @@ Open Java Mission Control and connect to default HotSpot of our JVM:
 ```
     jmc
 ```
+`cd C:\Users\Yuliya_Seliukova\Downloads\jmc-9.0.0_windows-x64\jmc-9.0.0_windows-x64\JDK Mission Control
+jmc -vm "C:\Program Files\Java\jdk-17\bin"`
+
+![img_26.png](img_26.png)
 
 ## jinfo
 Print system properties and command-line flags that were used to start the JVM.
@@ -176,6 +259,10 @@ Print system properties and command-line flags that were used to start the JVM.
     jps
     jinfo <pid>
 ```
+
+###### Result:
+
+Info is stored in jinfo.txt file
 
 ## Practical task evaluation rules:
 * OOM errors troubleshooting : 30 points

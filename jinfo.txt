@@ -1,0 +1,62 @@
+Java System Properties:
+#Sat Nov 23 22:45:36 TRT 2024
+java.specification.version=17
+sun.cpu.isalist=amd64
+sun.jnu.encoding=Cp1252
+java.class.path=heap-1.0.0-SNAPSHOT.jar
+java.vm.vendor=Oracle Corporation
+sun.arch.data.model=64
+user.variant=
+java.vendor.url=https\://java.oracle.com/
+user.timezone=Europe/Istanbul
+os.name=Windows 11
+java.vm.specification.version=17
+sun.java.launcher=SUN_STANDARD
+user.country=US
+sun.boot.library.path=C\:\\Program Files\\Java\\jdk-17\\bin
+sun.java.command=heap-1.0.0-SNAPSHOT.jar
+jdk.debug=release
+sun.cpu.endian=little
+user.home=C\:\\Users\\Yuliya_Seliukova
+user.language=en
+sun.stderr.encoding=cp437
+java.specification.vendor=Oracle Corporation
+java.version.date=2023-04-18
+java.home=C\:\\Program Files\\Java\\jdk-17
+file.separator=\\
+java.vm.compressedOopsMode=32-bit
+line.separator=\r\n
+sun.stdout.encoding=cp437
+java.specification.name=Java Platform API Specification
+java.vm.specification.vendor=Oracle Corporation
+user.script=
+sun.management.compiler=HotSpot 64-Bit Tiered Compilers
+java.runtime.version=17.0.7+8-LTS-224
+user.name=Yuliya_Seliukova
+path.separator=;
+os.version=10.0
+java.runtime.name=Java(TM) SE Runtime Environment
+file.encoding=Cp1252
+java.vm.name=Java HotSpot(TM) 64-Bit Server VM
+java.vendor.url.bug=https\://bugreport.java.com/bugreport/
+java.io.tmpdir=C\:\\Users\\YULIYA~1\\AppData\\Local\\Temp\\
+java.version=17.0.7
+user.dir=C\:\\Users\\Yuliya_Seliukova\\IdeaProjects\\MonitoringAndTroubleshooting
+os.arch=amd64
+java.vm.specification.name=Java Virtual Machine Specification
+sun.os.patch.level=
+native.encoding=Cp1252
+java.library.path=C\:\\Program Files\\Java\\jdk-17\\bin;C\:\\WINDOWS\\Sun\\Java\\bin;C\:\\WINDOWS\\system32;C\:\\WINDOWS;C\:\\Program Files\\Common Files\\Oracle\\Java\\javapath;C\:\\P
+rogram Files (x86)\\Common Files\\Oracle\\Java\\javapath;C\:\\Python311\\Scripts\\;C\:\\Python311\\;C\:\\WINDOWS\\system32;C\:\\WINDOWS;C\:\\WINDOWS\\System32\\Wbem;C\:\\WINDOWS\\Syste
+m32\\WindowsPowerShell\\v1.0\\;C\:\\WINDOWS\\System32\\OpenSSH\\;C\:\\Program Files\\Microsoft VS Code\\bin;C\:\\ProgramData\\chocolatey\\bin;C\:\\Program Files\\Git\\cmd;C\:\\Program
+Files\\Cloud Foundry;C\:\\Program Files\\apache-maven-3.9.3\\bin;C\:\\Program Files\\nodejs\\;C\:\\Program Files\\Java\\jdk-17\\bin;C\:\\Program Files\\Java\\jdk-17\\bin;C\:\\Users\\Yu
+liya_Seliukova\\AppData\\Local\\Microsoft\\WindowsApps;C\:\\Users\\Yuliya_Seliukova\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Schniz.fnm_Microsoft.Winget.Source_8wekyb3d8bbwe;C\:\\Users\\Yuliya_Seliukova\\AppData\\Roaming\\npm;.
+java.vm.info=mixed mode, sharing
+java.vendor=Oracle Corporation
+ze=104857600 -XX:MarkStackSize=4194304 -XX:MaxHeapSize=104857600 -XX:MaxNewSize=62914560 -XX:MinHeapDeltaBytes=1048576 -XX:MinHeapSize=8388608 -XX:NonNMethodCodeHeapSize=5839372 -XX:NonProfiledCodeHeapSize=122909434 -XX:ProfiledCodeHeapSize=122909434 -XX:ReservedCodeCacheSize=251658240 -XX:+SegmentedCodeCache -XX:SoftMaxHeapSize=104857600 -XX:+UseCompressedClassPointers -XX:+UseCompressedOops -XX:+UseFastUnorderedTimeStamps -XX:+UseG1GC -XX:-UseLargePagesIndividualAllocation
+
+VM Arguments:
+jvm_args: -Xmx100m
+java_command: heap-1.0.0-SNAPSHOT.jar
+java_class_path (initial): heap-1.0.0-SNAPSHOT.jar
+Launcher Type: SUN_STANDARD
